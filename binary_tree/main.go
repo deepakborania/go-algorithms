@@ -33,27 +33,33 @@ func InorderTraversal(root *TreeNode) []int {
 	return result
 }
 
-// validateBST validates if a binary tree is a valid BST by checking if the inorder traversal is sorted or not.
-func validateBST(root *TreeNode) bool {
-	stack := []*TreeNode{}
-	var prev *TreeNode
-	curr := root
-	for curr != nil || len(stack) > 0 {
-		for curr != nil {
-			stack = append([]*TreeNode{curr}, stack...)
-			curr = curr.left
-		}
-		curr, stack = stack[0], stack[1:]
-
-		// If current element is not larger than previous element in inorder traversal, it is not BST.
-		if prev != nil && curr.val <= prev.val {
-			return false
-		}
-
-		prev = curr
-		curr = curr.right
+// PreorderTraversal implements iterative preorder traversal of the binary tree
+func PreorderTraversal(root *TreeNode) []int {
+	result := []int{}
+	if root == nil {
+		return result
 	}
-	return true
+	//Push root to stack
+	stack := []*TreeNode{root}
+
+	// while stack is not empty
+	for len(stack) > 0 {
+		curr := stack[0]
+		stack = stack[1:]
+		// Add popped element to result
+		result = append(result, curr.val)
+
+		//First add right element to stack
+		if curr.right != nil {
+			stack = append([]*TreeNode{curr.right}, stack...)
+		}
+		//then left
+		if curr.left != nil {
+			stack = append([]*TreeNode{curr.left}, stack...)
+		}
+
+	}
+	return result
 }
 
 func main() {
@@ -62,6 +68,7 @@ func main() {
 		left:  &TreeNode{10, &TreeNode{1, nil, nil}, &TreeNode{7, &TreeNode{5, nil, nil}, &TreeNode{6, nil, nil}}},
 		right: &TreeNode{2, &TreeNode{3, nil, nil}, nil},
 	}
-	fmt.Println(InorderTraversal(root))
-	fmt.Println("Is valid bst? ", validateBST(root))
+	fmt.Println("Inorder: ", InorderTraversal(root))
+	fmt.Println("Preorder:", PreorderTraversal(root))
+
 }
