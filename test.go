@@ -1,7 +1,7 @@
-package main
+package test
 
 import "fmt"
 
-func main(){
-  fmt.Println("Hello, algorithms")
+func main() {
+	fmt.Println("Hello, algorithms")
 }
