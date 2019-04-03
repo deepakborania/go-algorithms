@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main(){
-  _ := 1
+  fmt.Println("Hello, algorithms")
 }
