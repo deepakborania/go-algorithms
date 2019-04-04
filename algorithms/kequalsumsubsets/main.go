@@ -54,6 +54,8 @@ func helper(nums []int, target, idx int, groups []int) bool {
 			// In case last selection of group wasn't right for this element, backtrack
 			groups[i] -= elem
 		}
+		//Ensure all 0 groups are at the end. Reduces recursive calls.
+		// Infact can break for any repeated values of groups[i]
 		if groups[i] == 0 {
 			break
 		}
