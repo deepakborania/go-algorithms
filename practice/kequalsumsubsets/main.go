@@ -65,4 +65,10 @@ func helper(nums []int, target, idx int, groups []int) bool {
 func main() {
 	nums := []int{4, 3, 2, 3, 5, 2, 1}
 	fmt.Println(nums, "=", canPartitionKSubsets(nums, 4))
+
+	nums = []int{1, 5, 11, 5}
+	fmt.Println(nums, "=", canPartitionKSubsets(nums, 2))
+
+	nums = []int{1, 2, 3, 5}
+	fmt.Println(nums, "=", canPartitionKSubsets(nums, 2))
 }
