@@ -7,9 +7,22 @@ import (
 
 func getPermutation(n, k int) string {
 
-	blockSize := factorial(n - 1)
-	block := k / blockSize
-	return strconv.Itoa(block)
+	// blockSize := factorial(n - 1)
+	// block := k / blockSize
+	numbers := make([]int, n)
+	result := ""
+	for i := 0; i < n; i++ {
+		numbers[i] = i + 1
+	}
+	k--
+	for i := 1; i <= n; i++ {
+		f := factorial(len(numbers) - 1)
+		idx := k / f
+		result += strconv.Itoa(numbers[idx])
+		numbers = append(numbers[:idx], numbers[idx+1:]...) // Remove this index from numbers
+		k = k % f
+	}
+	return result
 }
 
 func factorial(n int) int {
@@ -20,5 +33,5 @@ func factorial(n int) int {
 	return result
 }
 func main() {
-	fmt.Println(getPermutation(4, 14))
+	fmt.Println(getPermutation(4, 9))
 }
